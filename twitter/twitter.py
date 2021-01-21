@@ -5,6 +5,8 @@ import chromedriver_binary
 import sys
 import os
 import time
+import csv
+import pandas as pd
 
 sys.path.append(os.path.abspath(".."))
 
@@ -27,9 +29,10 @@ if "ログイン" in b.title:
     loginBtn.click()
     time.sleep(2)
 
-tweet = "テスト"
-b.get("https://twitter.com/compose/tweet?text=" + tweet)
-
-time.sleep(3)
-tweetBtn = b.find_element_by_css_selector("div[data-testid='tweetButton']")
-tweetBtn.click()
+df = pd.read_csv("../greeting.csv", encoding="UTF-8")
+for index, item in df.iterrows():
+    tweet = item['あいさつ'].strip()
+    b.get("https://twitter.com/compose/tweet?text=" + tweet)
+    time.sleep(2)
+    tweetBtn = b.find_element_by_css_selector("div[data-testid='tweetButton']")
+    tweetBtn.click()
