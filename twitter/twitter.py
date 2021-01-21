@@ -2,7 +2,12 @@
 
 from selenium import webdriver
 import chromedriver_binary
+import sys
+import os
 import time
+
+sys.path.append(os.path.abspath(".."))
+
 from settings import settings
 
 b = webdriver.Chrome()
