@@ -5,7 +5,7 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 
 load_dotenv(verbose=True)
-dotenvPath = join(os.environ.get("PYPATH"), ".env")
+dotenvPath = join(os.("../"), ".env")
 load_dotenv(dotenvPath)
 
 TPS = os.environ.get("TWITTER_PASS")

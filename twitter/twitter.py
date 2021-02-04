@@ -7,10 +7,7 @@ import os
 import time
 import csv
 import pandas as pd
-
-sys.path.append(os.path.abspath(".."))
-
-from settings import settings
+import settings
 
 b = webdriver.Chrome()
 
