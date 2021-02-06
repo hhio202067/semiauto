@@ -4,7 +4,7 @@ import win32gui
 import win32api
 import pyperclip as pc
 
-import reply_list as rl
+import replylist as rl
 
 import random
 
@@ -24,7 +24,7 @@ Y_send_stamp = 600
 # メッセージ受信判定の開始x座標
 X_receive_message_start = 1065
 # メッセージ受信判定の終了x座標
-X_receive_message_end = 1521
+X_receive_message_end = 1100
 # メッセージ受信判定のy座標
 Y = 548
 
@@ -36,12 +36,16 @@ Y = 548
 #     pag.hotkey("ctrl", "v")
 #     pag.hotkey("return")
 
+# クリック位置確認
+# pag.click(X_open_line_from_task_bar, Y_open_line_from_task_bar)
+# pag.moveTo(1250, 548)
 
 # 自動返信bot
 def send(reply):
     pc.copy(reply)
     pag.hotkey("ctrl", "v")
     pag.hotkey("return")
+    print("send completed")
 
 desktop = win32gui.GetDesktopWindow()
 document = win32gui.GetDC(desktop)
@@ -65,10 +69,11 @@ while True:
             receive = True
             break
         i += 1
-    if receive == True:
-        n = random.randint(1, 1000)
 
-        reply = rl.reply_list[random.randint(0, len(rl.reply_list)-1)]
+    if receive == True:
+        n = random.randint(1, 200)
+
+        reply = rl.WORDS[random.randint(0, len(rl.WORDS)-1)]
         if reply == "けんつめし":
             reply = hiragana[random.randint(0, len(hiragana)-1)] + hiragana[random.randint(0, len(hiragana)-1)] + "つめし"
         elif reply == "せんせい":
@@ -83,17 +88,26 @@ while True:
             send("いうのですか")
 
         print("section", count, "n =", n)
-        if n % 4 == 0:
-            send("ってこと")
-        if n % 5 == 0:
-            send("ですか？")
-        if n % 2 == 0:
-            send("？")
-        else :
-            random_reply = ""
-            for j in range(0, n+1):
-                random_reply += hiragana[random.randint(0, len(hiragana)-1)]
-            send(random_reply)
+        if n <= 100:
+            if n % 3 == 0:
+                send("かよ")
+            else:
+                if n % 4 == 0:
+                    send("ってこと")
+                if n % 10 == 0:
+                    send("ですか？")
+                if n % 2 == 0:
+                    send("？")
+                if n % 7 == 0 :
+                    random_reply = ""
+                    for j in range(0, n+1):
+                        random_reply += hiragana[random.randint(0, len(hiragana)-1)]
+                    send(random_reply)
+                if n % 17 == 0:
+                    send("ではないのかな")
+                if n % 13 == 0:
+                    send("か")
+
     print("section", count, "end")
     count += 1
 
