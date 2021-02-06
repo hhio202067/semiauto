@@ -24,7 +24,7 @@ Y_send_stamp = 600
 # メッセージ受信判定の開始x座標
 X_receive_message_start = 1065
 # メッセージ受信判定の終了x座標
-X_receive_message_end = 1521
+X_receive_message_end = 1100
 # メッセージ受信判定のy座標
 Y = 548
 
@@ -36,12 +36,16 @@ Y = 548
 #     pag.hotkey("ctrl", "v")
 #     pag.hotkey("return")
 
+# クリック位置確認
+# pag.click(X_open_line_from_task_bar, Y_open_line_from_task_bar)
+# pag.moveTo(1250, 548)
 
 # 自動返信bot
 def send(reply):
     pc.copy(reply)
     pag.hotkey("ctrl", "v")
     pag.hotkey("return")
+    print("send completed")
 
 desktop = win32gui.GetDesktopWindow()
 document = win32gui.GetDC(desktop)
@@ -65,6 +69,7 @@ while True:
             receive = True
             break
         i += 1
+
     if receive == True:
         n = random.randint(1, 200)
 
